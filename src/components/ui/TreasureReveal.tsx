@@ -5,7 +5,7 @@ import gsap from "gsap";
 import { useAppState } from "@/state/AppStateContext";
 
 const RESUME_HREF =
-  "https://docs.google.com/document/d/1wBGkE2sbyFYn_ewGr9ALJA_6Veoq9aIv/export?format=pdf";
+  "https://docs.google.com/document/d/1NNW3SVbEbe-BJ7oNc1dN8XAUZrdXrm4K/export?format=pdf";
 
 export function TreasureReveal() {
   const { state, dispatch } = useAppState();
