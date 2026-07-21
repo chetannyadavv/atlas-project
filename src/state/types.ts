@@ -9,9 +9,13 @@ export interface AppState {
   currentDestination: DestinationId | null;
   isTraveling: boolean;
   reducedMotion: boolean;
+  treasureOpen: boolean;
 }
 
 export type AppAction =
   | { type: "TRAVEL_START"; destination: DestinationId }
+  | { type: "RETURN_HOME" }
   | { type: "TRAVEL_COMPLETE" }
-  | { type: "SET_REDUCED_MOTION"; value: boolean };
+  | { type: "SET_REDUCED_MOTION"; value: boolean }
+  | { type: "OPEN_TREASURE" }
+  | { type: "CLOSE_TREASURE" };

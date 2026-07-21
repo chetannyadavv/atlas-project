@@ -13,6 +13,7 @@ const initialState: AppState = {
   currentDestination: null,
   isTraveling: false,
   reducedMotion: false,
+  treasureOpen: false,
 };
 
 function reducer(state: AppState, action: AppAction): AppState {
@@ -23,10 +24,20 @@ function reducer(state: AppState, action: AppAction): AppState {
         isTraveling: true,
         currentDestination: action.destination,
       };
+    case "RETURN_HOME":
+      return {
+        ...state,
+        isTraveling: true,
+        currentDestination: null,
+      };
     case "TRAVEL_COMPLETE":
       return { ...state, isTraveling: false };
     case "SET_REDUCED_MOTION":
       return { ...state, reducedMotion: action.value };
+    case "OPEN_TREASURE":
+      return { ...state, treasureOpen: true };
+    case "CLOSE_TREASURE":
+      return { ...state, treasureOpen: false };
     default:
       return state;
   }
@@ -42,7 +53,6 @@ const AppStateContext = createContext<AppStateContextValue | null>(null);
 export function AppStateProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  // Respect OS-level reduced motion preference (03_User_Experience.md, 08_Development_Guidelines.md)
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     dispatch({ type: "SET_REDUCED_MOTION", value: mediaQuery.matches });

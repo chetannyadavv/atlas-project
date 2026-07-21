@@ -1,7 +1,6 @@
 import { AppStateProvider } from "@/state/AppStateContext";
 import { World } from "@/components/world/World";
 import { Navigation } from "@/components/navigation/Navigation";
-import { Camera } from "@/components/camera/Camera";
 import { UI } from "@/components/ui/UI";
 
 export default function Home() {
@@ -9,9 +8,10 @@ export default function Home() {
     <AppStateProvider>
       <main className="relative h-screen w-screen overflow-hidden">
         <World />
-        <Camera />
-        <Navigation />
-        <UI />
+        <div className="pointer-events-none absolute inset-0 z-10">
+          <Navigation />
+          <UI />
+        </div>
       </main>
     </AppStateProvider>
   );
