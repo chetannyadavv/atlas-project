@@ -108,17 +108,20 @@ const RAW_DESTINATIONS: Omit<Destination, "position" | "dockPosition">[] = [
         {
           title: "DevMentor — AI-Augmented Online Judge Platform",
           description:
-            "A Docker-based online judge for secure, sandboxed code execution, with an AI mentor layered in " +
-            "that reviews submissions for style and complexity — architected as an independent service so a " +
-            "flaky AI call can never take down the core judging path.",
+            "A Docker-based online judge for secure, sandboxed code execution, currently being built in " +
+            "deliberate phases: a fully production-grade judge first — auth, versioned problems, sandboxed " +
+            "execution, live WebSocket verdicts, leaderboards, observability — before any AI work begins. " +
+            "The AI mentor layer is planned as a fully isolated queue/worker so a Claude outage can never " +
+            "block judging, a lesson learned from an earlier version that called the AI inline.",
           highlights: [
             "Sandboxed execution of Python, C++, Java with per-test-case verdicts and resource limits",
-            "Network-isolated containers for secure submission handling",
-            "Asynchronous judging pipeline: FastAPI + Redis + Celery with dedicated worker pools",
-            "AI mentor (Claude API) generating conceptual hints and post-acceptance code reviews",
-            "AI service isolated from the core judging path by design",
+            "Network-isolated, read-only, non-root Docker containers per submission",
+            "Live per-test-case verdicts pushed over WebSockets instead of polling",
+            "Submission replay UI stepping through stored per-test artifacts",
+            "AI mentor (Claude API) planned as an isolated queue/worker, decoupled from the core judging path",
           ],
           tech: ["FastAPI", "PostgreSQL", "Redis", "Celery", "Docker", "React"],
+          link: "https://github.com/chetannyadavv/devMentor",
         },
       ],
     },
